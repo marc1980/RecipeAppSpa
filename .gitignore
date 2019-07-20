@@ -1,0 +1,37 @@
+#System Files
+.DS_Store
+
+# IDEs and editors
+/.vscode
+
+
+### DotnetCore ###
+# .NET Core build folders
+/Backend/bin
+/Backend/obj
+
+
+### Angular ###
+## Angular ##
+# compiled output
+/Frontend/dist
+/Frontend/tmp
+/Frontend/app/**/*.js
+/Frontend/app/**/*.js.map
+
+# dependencies
+/Frontend/node_modules
+/Frontend/bower_components
+
+# misc
+/Frontend/.sass-cache
+/Frontend/connect.lock
+/Frontend/coverage/*
+/Frontend/libpeerconnection.log
+/Frontend/npm-debug.log
+/Frontend/testem.log
+/Frontend/typings
+
+# e2e
+/Frontend/e2e/*.js
+/Frontend/e2e/*.map
