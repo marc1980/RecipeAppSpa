@@ -1,0 +1,68 @@
+
+POST https://localhost:5001/api/recipes HTTP/1.1
+content-type: application/json
+
+{
+    "Name": "Recipe3",
+    "Ingredients": [
+        { "name": "Beef" , "amount": 2 , "unit": "Kilogram"},
+        { "name": "Oil" , "amount": 1 , "unit": "Mililiter"}
+        ],
+    "Steps": [
+        {"Rank": 1, "Description":"Step1"},
+        {"Rank": 2, "Description":"Step2"}
+    ]
+}
+
+###
+
+GET https://localhost:5001/api/recipes HTTP/1.1
+content-type: application/json
+
+###
+
+GET https://localhost:5001/api/recipes/3 HTTP/1.1
+content-type: application/json
+
+###
+GET https://localhost:5001/api/recipes/456 HTTP/1.1
+content-type: application/json
+
+###
+
+PUT https://localhost:5001/api/recipes/3 HTTP/1.1
+content-type: application/json
+
+{
+  "id": 3,
+  "name": "Recipe3-edited",
+  "ingredients": [
+    {
+        "id": 9,
+      "name": "Beef-new",
+      "amount": 2,
+      "unit": "Kilogram"
+    },
+    {
+      "id": 8,
+      "name": "Oil-edited",
+      "amount": 2,
+      "unit": "Mililiter"
+    }
+  ],
+  "steps": [
+    {
+      "id": 5,
+      "rank": 2,
+      "description": "Step1"
+    },
+    {
+      "rank": 3,
+      "description": "Step3-new"
+    }
+  ]
+}
+
+###
+DELETE https://localhost:5001/api/recipes/2 HTTP/1.1
+content-type: application/json
