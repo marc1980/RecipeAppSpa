@@ -3,7 +3,12 @@ POST https://localhost:5001/api/recipes HTTP/1.1
 content-type: application/json
 
 {
-    "Name": "Recipe3",
+    "Name": "Recipe 6",
+    "ShortDescription": "Short description od the recipe",
+    "Description": "Description of the recipe bla bla bla bla bla bla bla bla ",
+    "ImageUrl": "http://i.imgur.com/Dbpqoiq.jpg",
+    "PreparationTime": "20",
+    "Portions": "2",
     "Ingredients": [
         { "name": "Beef" , "amount": 2 , "unit": "Kilogram"},
         { "name": "Oil" , "amount": 1 , "unit": "Mililiter"}
@@ -21,7 +26,7 @@ content-type: application/json
 
 ###
 
-GET https://localhost:5001/api/recipes/3 HTTP/1.1
+GET https://localhost:5001/api/recipes/5 HTTP/1.1
 content-type: application/json
 
 ###
@@ -36,6 +41,9 @@ content-type: application/json
 {
   "id": 3,
   "name": "Recipe3-edited",
+  "ImageUrl": "http://i.imgur.com/e35i2ie.jpg",
+  "PreparationTime": "20",
+  "Portions": "2",
   "ingredients": [
     {
         "id": 9,
@@ -65,4 +73,8 @@ content-type: application/json
 
 ###
 DELETE https://localhost:5001/api/recipes/2 HTTP/1.1
+content-type: application/json
+
+###
+GET https://localhost:5001/api/ingredient/UnitOfMeasureTypes HTTP/1.1
 content-type: application/json

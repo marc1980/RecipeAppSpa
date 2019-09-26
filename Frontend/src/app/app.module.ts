@@ -17,9 +17,10 @@ import { MatInputModule } from "@angular/material/input";
 
 import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { EditComponent } from "./recipe/edit/edit.component";
+import { DetailsComponent } from './recipe/details/details.component';
 
 @NgModule({
-  declarations: [AppComponent, RecipeListComponent, EditComponent],
+  declarations: [AppComponent, RecipeListComponent, EditComponent, DetailsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

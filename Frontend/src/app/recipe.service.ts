@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { environment } from './../environments/environment'
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
@@ -9,7 +10,7 @@ import { Recipe } from "./models/Recipe";
 })
 export class RecipeService {
   constructor(private http: HttpClient) {}
-  private recipeBaseUrl = "https://localhost:5001/api/recipes";
+  private recipeBaseUrl = environment.apiUrl;
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.recipeBaseUrl);

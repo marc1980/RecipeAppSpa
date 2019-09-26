@@ -40,7 +40,7 @@ namespace Backend
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:4200")
+                    builder => builder.WithOrigins(Configuration.GetValue<string>("FrontendUrl"))
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

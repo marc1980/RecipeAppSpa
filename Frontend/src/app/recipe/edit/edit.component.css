@@ -1,0 +1,16 @@
+.recipe-general-formfield {
+    display: block;
+}
+.container {
+    display: flex;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.width50 {
+width: 70%;
+}
+img {
+    max-width: 350px;
+    margin: 20px;
+    align-content: flex-end 
+}
