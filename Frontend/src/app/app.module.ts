@@ -14,6 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from '@angular/material/select';
 
 import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { EditComponent } from "./recipe/edit/edit.component";
@@ -33,7 +34,8 @@ import { DetailsComponent } from './recipe/details/details.component';
     MatIconModule,
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

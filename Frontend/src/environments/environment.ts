@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001/api/recipes',
+  apiUrl: 'https://localhost:44332/api',//'https://localhost:5001/api/recipes',
   placeholderUrl: 'https://via.placeholder.com/350x250.png?text=Add+an+image'
 };
 

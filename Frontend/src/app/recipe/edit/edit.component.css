@@ -1,16 +1,38 @@
 .recipe-general-formfield {
     display: block;
 }
-.container {
+.recipeContainer {
     display: flex;
     margin-left: 50px;
     margin-right: 50px;
 }
-.width50 {
-width: 70%;
+.ingredientsContainer {
+    margin-left: 50px;
+}
+.stepsContainer {
+    margin-left: 50px;
+}
+.width70 {
+    width: 70%;
 }
 img {
     max-width: 350px;
     margin: 20px;
     align-content: flex-end 
+}
+.card {
+    margin: 30px;
+}
+.input-steps {
+    min-width: 85%;
+}
+.input-ingredients {
+    min-width: 60%;
+}
+.form-button {
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.add-button {
+    margin-right: 20px;
 }

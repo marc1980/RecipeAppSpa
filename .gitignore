@@ -6,7 +6,7 @@
 
 # IDEs and editors
 /.vscode
-
+/Backend/.vs
 
 ### DotnetCore ###
 # .NET Core build folders

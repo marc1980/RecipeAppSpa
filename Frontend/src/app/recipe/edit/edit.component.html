@@ -1,35 +1,38 @@
 <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <mat-card>
+    <mat-card class="card">
         <mat-card-header>
           <mat-card-title>Recipe</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-        <div class="container">
-        <div class="width50">       
+        <div class="recipeContainer">
+        <div class="width70">       
            <mat-form-field class="recipe-general-formfield">
           <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name"/>
+          <input matInput #name required type="text" formControlName="name"/>
+          <mat-hint align="end">{{name.value.length}} / 35</mat-hint>
         </mat-form-field>
         <mat-form-field class="recipe-general-formfield">
           <mat-label>Short description</mat-label>
-          <input matInput type="text" formControlName="shortDescription"/>
+          <input matInput #shortDescription required type="text" formControlName="shortDescription"/>
+          <mat-hint align="end">{{shortDescription.value.length}} / 45</mat-hint>
         </mat-form-field>
         <mat-form-field class="recipe-general-formfield">
           <mat-label>Description</mat-label>
-          <textarea matInput type="text" formControlName="description"></textarea>
+          <textarea matInput #description required type="text" formControlName="description"></textarea>
+          <mat-hint align="end">{{description.value.length}} / 120</mat-hint>
         </mat-form-field>
 
         <mat-form-field class="recipe-general-formfield">
             <mat-label>Image url</mat-label>
-            <input matInput type="text" formControlName="imageUrl" (blur)="setImageUrl()"/>
+            <input matInput required type="text" formControlName="imageUrl" (blur)="setImageUrl()"/>
         </mat-form-field>
         <mat-form-field class="recipe-general-formfield">
             <mat-label>Preparation time</mat-label>
-            <input matInput type="number" formControlName="preparationTime" />
+            <input matInput required type="number" formControlName="preparationTime" />
         </mat-form-field>
         <mat-form-field class="recipe-general-formfield">
             <mat-label>Portions</mat-label>
-            <input matInput type="number" formControlName="portions" />
+            <input matInput required type="number" formControlName="portions" />
         </mat-form-field>
       </div>
       <div >
@@ -39,30 +42,31 @@
 
       </mat-card-content>
     </mat-card>
-        <hr/>  
-  <mat-card>
+  <mat-card class="card">
     <mat-card-header>
       <mat-card-title>Ingredients</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <div formArrayName="ingredients">
+        <div formArrayName="ingredients" class="ingredientsContainer">
           <div
             *ngFor="let ingredient of ingredientForms.controls; let i = index"
             [formGroupName]="i"
           >
-            <mat-form-field class="xs">
+            <mat-form-field class="input-ingredients">
                 <mat-label></mat-label>
               <input matInput placeholder="name" formControlName="name" />
             </mat-form-field>
 
-            <mat-form-field class="xs">
+            <mat-form-field>
                 <mat-label ></mat-label>
               <input matInput placeholder="amount" formControlName="amount" />
             </mat-form-field>
 
-            <mat-form-field class="sm">
+            <mat-form-field >
               <mat-label></mat-label>
-              <input matInput placeholder="unit" formControlName="unit" />
+              <mat-select matInput placeholder="unit" formControlName="unit" [compareWith]="compareUnits">
+                <mat-option *ngFor="let item of unitsOfMeasure" value={{item}}>{{item}}</mat-option>
+              </mat-select>
             </mat-form-field>
 
             <button type='button' mat-mini-fab color="warn" (click)="deleteIngredient(i)">
@@ -72,52 +76,47 @@
         </div>
       </mat-card-content>
       <mat-card-footer>
-        <mat-card-actions>
-              <button type="button" mat-fab color="primary" (click)="addIngredient()">
+        <mat-card-actions align="end">
+              <button type="button"class="add-button" mat-fab color="primary" (click)="addIngredient()">
                   <mat-icon>add</mat-icon>
         </button>
         </mat-card-actions>
       </mat-card-footer>
   </mat-card>
-  <hr/>
-  <mat-card>
+  <mat-card class="card">
       <mat-card-header>
         <mat-card-title>Preparation steps</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-          <div formArrayName="steps">
+          <div formArrayName="steps" class="stepsContainer">
             <div
               *ngFor="let step of stepForms.controls; let i = index"
               [formGroupName]="i"
             >
-              <mat-form-field class="xs">
-                  <mat-label></mat-label>
+              <mat-form-field class="input-steps">
+                <mat-label></mat-label>
                 <input matInput placeholder="description" formControlName="description" />
               </mat-form-field>
               <button type='button' mat-mini-fab color="accent" [disabled]='i == stepForms.length-1' (click)="moveDownStep(i)">
-                  <mat-icon>keyboard_arrow_down</mat-icon>
+                <mat-icon>keyboard_arrow_down</mat-icon>
               </button>
               <button type='button' mat-mini-fab color="accent" [disabled]='i == 0' (click)="moveUpStep(i)">
-                  <mat-icon>keyboard_arrow_up</mat-icon>
+                <mat-icon>keyboard_arrow_up</mat-icon>
               </button>
               <button type='button' mat-mini-fab color="warn" (click)="deleteStep(i)">
-                  <mat-icon>delete</mat-icon>
+                <mat-icon>delete</mat-icon>
               </button>
             </div>
           </div>
         </mat-card-content>
         <mat-card-footer>
-          <mat-card-actions>
-                <button type="button" mat-fab color="primary" (click)="addStep()">
-                    <mat-icon>add</mat-icon>
-          </button>
+          <mat-card-actions align="end">
+            <button type="button" class="add-button" mat-fab color="primary" (click)="addStep()">
+              <mat-icon>add</mat-icon>
+            </button>
           </mat-card-actions>
         </mat-card-footer>
     </mat-card>
-    <button type="submit" mat-raised-button value="Change" [disabled]='!recipeForm.valid'> CHANGE </button>
-
+    <button type="button" mat-raised-button value="Back" [routerLink]="['']" class="form-button" > BACK </button>
+    <button type="submit" mat-raised-button mat-button color="primary" value="Save" [disabled]='!recipeForm.valid' class="form-button"> SAVE </button>
 </form>
-
-<p>Form Status:</p>
-<p>{{ recipeForm.status }}</p>
-<p>{{ recipeForm.errors }}</p>

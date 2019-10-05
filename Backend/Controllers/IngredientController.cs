@@ -15,6 +15,7 @@ namespace Backend.Controllers
 
         // GET api/ingredient/GetUnitOfMeasureTypes
         [HttpGet]
+        [Route("[action]")]
         public ActionResult<IEnumerable<string>> GetUnitOfMeasureTypes()
         {
             var UnitOfMeasureTypes = new List<string>();

@@ -12,6 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipeService } from 'src/app/recipe.service';
+import { UnitofmeasureService } from 'src/app/unitofmeasure.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -56,17 +58,24 @@ export class EditComponent implements OnInit {
   get stepForms() {
     return this.recipeForm.get('steps') as FormArray;
   }
+  unitsOfMeasure: string[];
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private unitofmeasureService: UnitofmeasureService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    let unitOfMeasureObservable = this.unitofmeasureService.getUnitsOfMeasureTypes();
+    let recipeObeservable = this.recipeService.getRecipe(this.id);
+
     if (this.id > 0) {
-      this.recipeService.getRecipe(this.id).subscribe(result => {
-        this.recipe = result;
+      forkJoin(unitOfMeasureObservable, recipeObeservable).subscribe( result => {
+        this.unitsOfMeasure = result[0];
+        this.recipe = result[1];
         this.recipeForm.patchValue({
           name: this.recipe.name,
           shortDescription: this.recipe.shortDescription,
@@ -99,9 +108,10 @@ export class EditComponent implements OnInit {
           );
         }
         this.sortSteps();
-
-        console.log(this.recipe);
-        console.log(this.recipeForm);
+      });
+    } else {
+      unitOfMeasureObservable.subscribe( u => {
+        this.unitsOfMeasure = u;
       });
     }
   }
@@ -114,7 +124,6 @@ export class EditComponent implements OnInit {
     this.recipe.portions = this.recipeForm.controls.portions.value;
     this.recipe.ingredients = this.ingredientForms.value;
     this.recipe.steps = this.stepForms.value;
-    console.log(this.recipe);
     if (this.id > 0) {
           this.recipeService
       .updateRecipe(this.recipe)
@@ -134,17 +143,19 @@ export class EditComponent implements OnInit {
         unit: ['', Validators.required]
       })
     );
-    console.log(this.ingredientForms);
   }
   deleteIngredient(index: number) {
     if (index != null) {
       this.ingredientForms.removeAt(index);
     }
-    console.log(this.ingredientForms);
   }
   addStep() {
-    const lastStep = this.stepForms.length - 1;
-    const newRank = this.stepForms.at(lastStep).value.rank + 1;
+    let newRank = 1;
+    if(this.stepForms.length > 0) {
+      const lastStep = this.stepForms.length - 1;
+      newRank = this.stepForms.at(lastStep).value.rank + 1;
+    }
+
     this.stepForms.push(
     this.fb.group({
       description: ['', Validators.required],
@@ -156,7 +167,6 @@ export class EditComponent implements OnInit {
     if (index != null) {
       this.stepForms.removeAt(index);
     }
-    console.log(this.stepForms);
   }
   moveDownStep(index: number) {
     this.swapSteps(index, index + 1);
@@ -199,5 +209,8 @@ export class EditComponent implements OnInit {
   setImagePlaceholder() {
     this.imageControl.setErrors({invalidImage: true});
     this.localImageUrl = environment.placeholderUrl;
+  }
+  compareUnits(u1: string, u2: string) : boolean {
+    return u1 && u2 && u1 === u2;
   }
 }
