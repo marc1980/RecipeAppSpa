@@ -20,3 +20,4 @@ The frontend uses an angular service to connect to the backend, and angular comp
 ## Demo
 
 See a demo of the application in the image below.
+![Recipe App demo using an animated GIF](DemoRecipeAppSpa.gif)
