@@ -1,5 +1,6 @@
 export class Review {
-  id: number;
+  id?: number;
+  recipeId: number;
   reviewer: string;
   body: string;
 }

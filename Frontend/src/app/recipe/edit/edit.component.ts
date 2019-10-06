@@ -31,8 +31,7 @@ export class EditComponent implements OnInit {
     preparationTime: 0,
     portions: 0,
     ingredients: [],
-    steps: [],
-    reviews: []
+    steps: []
   };
 
   recipeForm = this.fb.group({

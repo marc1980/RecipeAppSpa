@@ -12,5 +12,4 @@ export class Recipe {
   portions: number;
   ingredients: Ingredient[];
   steps: PreparationStep[];
-  reviews: Review[];
 }

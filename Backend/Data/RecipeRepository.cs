@@ -98,5 +98,21 @@ namespace Backend.Data
                 }
             }
         }
+
+        public IEnumerable<Review> ListReviews(int Id)
+        {
+            return _context.Reviews.Where(r => r.RecipeId == Id);
+        }
+
+        public void AddReview(Review review)
+        {
+            _context.Reviews.Add(review);
+            _context.SaveChangesAsync();
+        }
+
+        public bool RecipeExists(int id)
+        {
+            return _context.Recipes.Any(r => r.Id == id);
+        }
     }
 }

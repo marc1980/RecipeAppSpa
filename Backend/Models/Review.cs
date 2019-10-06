@@ -5,7 +5,7 @@ namespace Backend.Models
     public class Review
     {
         public int Id { get; set; }
-        public virtual Recipe Recipe { get; set; }
+        public int RecipeId { get; set; }
         [Required]
         [StringLength(100)]
         public string Reviewer { get; set; }

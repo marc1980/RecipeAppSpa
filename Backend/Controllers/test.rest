@@ -78,3 +78,21 @@ content-type: application/json
 ###
 GET https://localhost:5001/api/ingredient/UnitOfMeasureTypes HTTP/1.1
 content-type: application/json
+
+###
+
+GET https://localhost:44332/api/recipes/1/reviews HTTP/1.1
+content-type: application/json
+
+###
+
+POST https://localhost:44332/api/recipes/1/reviews HTTP/1.1
+content-type: application/json
+
+{
+  "RecipeId": "1",
+  "Reviewer": "Me again and again",
+  "Body": "Blabla bla blabla dfsfdsf sdfsdfsdf dsfsdfdsfs"
+}
+
+###

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { RecipeListComponent } from "./recipe-list/recipe-list.component";
+import { RecipeListComponent } from "./recipe/list/list.component";
 import { EditComponent } from "./recipe/edit/edit.component";
 import { DetailsComponent } from "./recipe/details/details.component";
 
