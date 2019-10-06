@@ -11,7 +11,8 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
-  Validators
+  Validators,
+  FormsModule
 } from '@angular/forms';
 
 @Component({
@@ -33,11 +34,7 @@ export class DetailsComponent implements OnInit {
     steps: []
   };
   reviews: Review[];
-  reviewForm = this.fb.group({
-    recipeId: [this.id],
-    reviewer: ['', [Validators.required, Validators.maxLength(35)]],
-    body: ['', [Validators.required, Validators.maxLength(200)]]
-  });
+  reviewForm = this.setReviewForm();
 
   constructor(
     private route: ActivatedRoute,
@@ -54,14 +51,28 @@ export class DetailsComponent implements OnInit {
       
       forkJoin(reviewObservable, recipeObservable).subscribe(result => {
         this.recipe = result[1];
-        this.reviews = result[0];
+        this.reviews = result[0].sort((a, b) => b.id - a.id).slice(0,3);
       });
     }
   }
+
+  setReviewForm() {
+    return this.fb.group({
+      recipeId: [this.id],
+      reviewer: ['', [Validators.required, Validators.maxLength(35)]],
+      body: ['', [Validators.required, Validators.maxLength(200)]]
+    });
+  }
+
   addReview() {
-    console.log(this.reviewForm.value);
-    this.reviewService.createReview(this.reviewForm.value).subscribe( success => {
-      this.reviews.push(this.reviewForm.value);
-    })
+    if(this.reviewForm.valid) {
+      this.reviewService.createReview(this.reviewForm.value).subscribe( success => {
+        this.reviews.unshift(this.reviewForm.value);
+        this.reviews = this.reviews.slice(0,3);
+        this.reviewForm.reset();
+        this.reviewForm.controls["reviewer"].setErrors(null);
+        this.reviewForm.controls["body"].setErrors(null);
+      })
+    }
   }
 }

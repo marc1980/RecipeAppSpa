@@ -18,17 +18,10 @@
 .review-box { grid-area: 2 / 2 / 3 / 3; } 
 }
 
-
-
-.recipe-general {
-
-}
 .recipe-general img {
     max-width: 350px;
 }
-.ingredients-card {
 
-}
-.preparation-steps-card {
-
+.full-width {
+    width: 100%;
 }
